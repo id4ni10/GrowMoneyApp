@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://service/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="MyMoneyService" targetNamespace="http://service/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/MyMoney2/MyMoneyService?xsd=1" namespace="http://service/" />
+    </xsd:schema>
+  </types>
+  <message name="getTransaction">
+    <part name="parameters" element="tns:getTransaction" />
+  </message>
+  <message name="getTransactionResponse">
+    <part name="parameters" element="tns:getTransactionResponse" />
+  </message>
+  <portType name="MyMoneyService">
+    <operation name="getTransaction">
+      <input wsam:Action="http://service/MyMoneyService/getTransactionRequest" message="tns:getTransaction" />
+      <output wsam:Action="http://service/MyMoneyService/getTransactionResponse" message="tns:getTransactionResponse" />
+    </operation>
+  </portType>
+  <binding name="MyMoneyServicePortBinding" type="tns:MyMoneyService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getTransaction">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MyMoneyService">
+    <port name="MyMoneyServicePort" binding="tns:MyMoneyServicePortBinding">
+      <soap:address location="http://localhost:8080/MyMoney2/MyMoneyService" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://service/" targetNamespace="http://service/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getTransaction" type="tns:getTransaction" />
+  <xs:element name="getTransactionResponse" type="tns:getTransactionResponse" />
+  <xs:complexType name="getTransaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getTransactionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:transacao" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="transacao">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="data" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="tipo" type="tns:tipo" />
+      <xs:element name="valor" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tipo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NENHUM" />
+      <xs:enumeration value="SAQUE" />
+      <xs:enumeration value="DEPOSITO" />
+      <xs:enumeration value="TRANSFERENCIAS" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
